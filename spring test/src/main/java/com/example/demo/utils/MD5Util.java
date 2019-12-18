@@ -1,4 +1,4 @@
-package com.ebuy.cloud.service.hwc.servicehwc.util;
+package com.example.demo.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

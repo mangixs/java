@@ -1,4 +1,4 @@
-package com.ebuy.cloud.service.hwc.servicehwc.entity;
+package com.example.demo.entity;
 
 public class WintiRequestMsg {
     /** 请求方法 */

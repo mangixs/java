@@ -1,8 +1,8 @@
-package com.ebuy.cloud.service.hwc.servicehwc.common;
+package com.example.demo.common;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ebuy.cloud.service.hwc.servicehwc.entity.WintiRequestMsg;
-import com.ebuy.cloud.service.hwc.servicehwc.util.SignUtil;
+import com.example.demo.entity.WintiRequestMsg;
+import com.example.demo.utils.SignUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WinitApi{
+public class WinitApi {
     private static final Logger logger = LoggerFactory.getLogger(WinitApi.class);
     private String token;
     private String appKey;

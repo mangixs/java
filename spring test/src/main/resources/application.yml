@@ -8,3 +8,33 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
 server:
   port: 8888
+winit:
+ account:
+   api:
+     appKey: hufanjin@163.com
+     clientId: MMEYYTQZNJITNMZHNY00NTNLLTGZOTUTYZLLZTCXODKYNDYY
+     clientSecret: NWEYYJHHNDETNDQXYI00NMZHLWE2YZGTNJHKMGY4NGZLYJHJNTI5MDK4MDAWNDA1MJU2NDQ=
+     platforms: YBERP
+     token: B652423FE31F492F73E4EF14A2645F08
+     trackUrl: http://openapi.winit.com.cn/openapi/service
+     url: http://api.winit.com.cn/ADInterface/api
+   default:
+     appKey: api@winit.com.cn
+     clientId: YJG1N2EWMWETODM0OS00MTK1LTG3MMYTMJDIYJM5NJQYMTLI
+     clientSecret: ZMRKMZCYNDCTYTC5MY00ODLKLTLHNJMTMME2ZGFHZDU0NWM4MTYWMDCWMJQ5MZUZNDQZNDQ=
+     platforms: OWNERERP
+     token: 867F2439E818C14A26CD1A748FA591CA
+     trackUrl: http://openapi.winit.com.cn/openapi/service
+     url: http://api.winit.com.cn/ADInterface/api
+   kevin:
+     appKey: 577702015@qq.com
+     clientId: NJC0M2Y3NTGTMZYZYI00Y2IWLWE3NJATMZCZOGQWMZBHMJC1
+     clientSecret: NGFHNDMWZDITNMU1YI00YTIXLTG4ZMQTY2MWYJZMZTZLYJZJMJY0MDCWNTK5ODAWNDM1ODC=
+     platforms: KEVINERP
+     token: E92BA882FD61A40B2BDE6A9AD9528F2E
+     trackUrl: http://openapi.winit.com.cn/openapi/service
+     url: http://api.winit.com.cn/ADInterface/api
+ list:
+   - default
+   - api
+   - kevin

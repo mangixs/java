@@ -1,4 +1,4 @@
-package com.ebuy.cloud.service.hwc.servicehwc.util;
+package com.example.demo.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpResponse;
@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 /**
 * 功能描述:
 * 〈工具类〉

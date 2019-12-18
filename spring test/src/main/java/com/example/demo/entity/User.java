@@ -1,4 +1,4 @@
-package com.example.demo.dao;
+package com.example.demo.entity;
 
 public class User {
     private int id;
@@ -100,5 +100,22 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", avator='" + avator + '\'' +
+                ", created_at='" + created_at + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                ", is_admin=" + is_admin +
+                ", is_confirmed=" + is_confirmed +
+                ", is_deleted=" + is_deleted +
+                ", employee_id='" + employee_id + '\'' +
+                '}';
     }
 }

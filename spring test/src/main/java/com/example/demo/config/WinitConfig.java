@@ -1,6 +1,7 @@
-package com.ebuy.cloud.service.hwc.servicehwc.config;
+package com.example.demo.config;
 
-import com.ebuy.cloud.service.hwc.servicehwc.common.WinitApi;
+
+import com.example.demo.common.WinitApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

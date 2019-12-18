@@ -1,9 +1,9 @@
-package com.ebuy.cloud.service.hwc.servicehwc.util;
+package com.example.demo.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.ebuy.cloud.service.hwc.servicehwc.entity.WintiRequestMsg;
-import org.apache.commons.lang.StringUtils;
+import com.example.demo.entity.WintiRequestMsg;
+import org.apache.commons.lang3.StringUtils;
 
 public class SignUtil {
     /**
