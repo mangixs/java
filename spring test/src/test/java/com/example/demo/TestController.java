@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.entity.Mongo.YbWangjiToken;
+import com.example.demo.mongo.YbWangjiTokenMongoDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -18,6 +20,9 @@ public class TestController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @Autowired
+    private YbWangjiTokenMongoDao ybWangjiTokenMongoDao;
+
     @Test
     public void testOne(){
         System.out.print("测试的一个方法 ---->");
@@ -28,5 +33,11 @@ public class TestController {
     public void testTwo(){
         String value = stringRedisTemplate.opsForValue().get("test-string-value");
         System.out.println(value);
+    }
+
+    @Test
+    public void mognodb(){
+        YbWangjiToken res = ybWangjiTokenMongoDao.getWangjiAccessToken("develop");
+        logger.info(res.toString());
     }
 }

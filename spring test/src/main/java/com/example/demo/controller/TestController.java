@@ -27,7 +27,4 @@ public class TestController {
         return res.toJSONString();
     }
 
-    public void TestOne(){
-        logger.info("logger---->one");
-    }
 }
