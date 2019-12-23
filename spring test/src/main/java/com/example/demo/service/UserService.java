@@ -4,7 +4,6 @@ import com.example.demo.entity.User;
 
 import java.util.List;
 
-
 public interface UserService {
     List<User> getAllUser() throws Exception;
 
