@@ -2,8 +2,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: yibai123456
-    url: jdbc:mysql://192.168.71.216:3306/yb_datacenter?useUnicode=true&characterEncoding=UTF-8
+    password: 
+    url: jdbc:
   thymeleaf:
     cache: false
     mode: HTML5
@@ -22,10 +22,10 @@ spring:
     password: ''
   mongo:
     connectionsPerHost: 50
-    dbname: hwc
-    mongoDatabaseAddress: 192.168.71.239:27017
-    password: hwc@2018
-    username: hwcuser
+    dbname: 
+    mongoDatabaseAddress: 
+    password: 
+    username: 
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
