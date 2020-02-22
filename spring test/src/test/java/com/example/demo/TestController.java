@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.entity.Mongo.YbWangjiToken;
+import com.example.demo.event.EatEventPublisherAware;
 import com.example.demo.mongo.YbWangjiTokenMongoDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,9 @@ public class TestController {
     @Autowired
     private YbWangjiTokenMongoDao ybWangjiTokenMongoDao;
 
+    @Autowired
+    private EatEventPublisherAware eatEventPublisherAware;
+
     @Test
     public void testOne(){
         System.out.print("测试的一个方法 ---->");
@@ -39,5 +43,10 @@ public class TestController {
     public void mognodb(){
         YbWangjiToken res = ybWangjiTokenMongoDao.getWangjiAccessToken("develop");
         logger.info(res.toString());
+    }
+
+    @Test
+    public void contextLoads() {
+        eatEventPublisherAware.refreshEvent();
     }
 }

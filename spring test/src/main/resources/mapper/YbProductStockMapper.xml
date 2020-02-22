@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.YbProductStockMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="groupResultMap" type="com.example.demo.entity.YbProductStock">
+        <id column="id" property="id"/>
+        <result column="sku" property="sku"/>
+        <result column="stock" property="stock"/>
+        <result column="on_way_stock" property="onWayStock"/>
+        <result column="available_stock" property="availableStock"/>
+        <result column="location" property="location"/>
+        <result column="warehouse_code" property="warehouseCode"/>
+        <result column="left_stock" property="leftStock"/>
+        <result column="is_in_mongo" property="isInMongo"/>
+        <result column="warehouse_id" property="warehouseId"/>
+        <result column="is_get_wyt_stock" property="isGetWytStock"/>
+        <result column="is_sync" property="isSync"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="first_instock_date" property="firstInstockDate"/>
+    </resultMap>
+    <select id="getStockByPage" resultMap="groupResultMap">
+        select id,sku,stock,on_way_stock,available_stock,warehouse_code from yb_product_stock where warehouse_code = #{warehouseCode}
+    </select>
+</mapper>

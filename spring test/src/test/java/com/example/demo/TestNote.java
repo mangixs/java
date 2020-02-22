@@ -9,13 +9,15 @@ public class TestNote {
     }
 
     public static void mapForeach(){
-        Map<String, Object> res = new HashMap<>();
-        res.put("key1", 123);
+        Map<String, String> res = new HashMap<>();
+        res.put("key1", "123");
         res.put("key2", "value2");
-        for (Map.Entry<String, Object> entry : res.entrySet()) {
+        for (Map.Entry<String, String> entry : res.entrySet()) {
             String keys = entry.getKey();
             String values = (String) entry.getValue();
             System.out.println("key--" + keys + "-- values --" + values);
         }
     }
+
+
 }

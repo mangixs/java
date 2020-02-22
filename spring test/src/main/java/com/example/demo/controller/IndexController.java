@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +21,8 @@ public class IndexController {
         return "index";
     }
     @RequestMapping("/test")
-    public String test(int id, ModelMap map) throws Exception {
-        User user = userService.getUserById(id);
-        map.addAttribute(user);
+    public String test(ModelMap map) throws Exception {
+        map.addAttribute("host", "http://blog.didispace.com");
         return "test";
     }
 
