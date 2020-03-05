@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.entity.Mongo.YbWangjiToken;
 import com.example.demo.event.EatEventPublisherAware;
 import com.example.demo.mongo.YbWangjiTokenMongoDao;
+import com.example.demo.service.AsyncTestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -48,5 +49,15 @@ public class TestController {
     @Test
     public void contextLoads() {
         eatEventPublisherAware.refreshEvent();
+    }
+
+    @Autowired
+    private AsyncTestService asyncTestService;
+
+    @Test
+    public void asyncTest(){
+        for (int i = 0; i <= 10; i++) {
+            asyncTestService.asyncTest(i);
+        }
     }
 }
