@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.71.216:3306/yb_datacenter?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost:3306/database?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
     username: root
-    password: yibai123456
+    password: root
   thymeleaf:
     cache: false
     mode: HTML5
@@ -23,9 +23,9 @@ spring:
   mongo:
     connectionsPerHost: 5000
     dbname: admin
-    mongoDatabaseAddress: dp.yibai-it.com:10035
+    mongoDatabaseAddress: localhost:20017
     password: root
-    username: yibai123456
+    username: root
 logging:
   level:
     com:
