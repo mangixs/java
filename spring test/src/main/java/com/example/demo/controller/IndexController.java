@@ -20,10 +20,15 @@ public class IndexController {
     public String index(){
         return "index";
     }
+
     @RequestMapping("/test")
     public String test(ModelMap map) throws Exception {
         map.addAttribute("host", "http://blog.didispace.com");
         return "test";
     }
 
+    @RequestMapping("/file")
+    public String fileUpload(){
+        return "file";
+    }
 }
