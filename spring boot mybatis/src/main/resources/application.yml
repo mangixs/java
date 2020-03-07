@@ -1,14 +1,8 @@
-#spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
-#spring.datasource.username=root
-#spring.datasource.password=yibai123456
-#spring.datasource.url=jdbc:mysql://192.168.71.216:3306/yb_datacenter?useUnicode=true&characterEncoding=UTF-8
-#mybatis.mapper-locations=classpath:mapper/*.xml
-
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: yibai123456
-    url: jdbc:mysql://192.168.71.216:3306/yb_datacenter?useUnicode=true&characterEncoding=UTF-8
+    password: root
+    url: jdbc:mysql://localhost:3306/database?useUnicode=true&characterEncoding=UTF-8
 mybatis:
   mapper-locations: classpath:mapper/*.xml
