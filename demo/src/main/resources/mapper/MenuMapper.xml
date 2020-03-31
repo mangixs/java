@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wx.demo.mapper.MenuMapper">
+    <select id="getAllMenu" resultType="com.wx.demo.entity.Menu">
+        select * from menu;
+    </select>
+
+    <select id = "getSingleMenu" resultType = "com.wx.demo.entity.Menu">
+        select * from menu where id = #{id}
+    </select>
+
+</mapper>

@@ -16,7 +16,7 @@ logging:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 server:
-  port: 8060
+  port: 8090
 
 file:
   upload-dir: ./src/main/resources/static/image

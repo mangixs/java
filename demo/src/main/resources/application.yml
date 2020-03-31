@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+  thymeleaf:
+    cache: false
+    mode: HTML5
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-wait:
+    password: ''
+  data:
+    mongodb:
+      host: 47.112.22.60:27017
+      database: hwc
+      username: hwcuser
+      password: hwc@2018_12!
+
+#    connectionsPerHost: 50
+#    dbname: hwc
+#    mongoDatabaseAddress: 47.112.22.60:27017
+#    password: hwc@2018_12!
+#    username: hwcuser
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
