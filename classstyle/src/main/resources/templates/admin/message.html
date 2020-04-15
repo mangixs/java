@@ -1,47 +1,51 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>班级风采网站后台管理系统</title>
-		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
 
-		<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+<head>
+	<meta charset="utf-8">
+	<title>班级风采网站后台管理系统</title>
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-		<script src="lib/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/theme.css">
+	<link rel="stylesheet" href="/css/page.css">
+	<style type="text/css">
+		.messge {
+			width: 50%;
+		}
 
-		<link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
-		
-		<style type="text/css">
-			.messge{
-				width: 50%;
-			}
-			.operation{
-				width: 100px;
-			}
-		</style>
-	</head>
-	<body class=" theme-blue">
+		.operation {
+			width: 100px;
+		}
+	</style>
+</head>
 
+<body class="theme-blue">
+	<div id="app">
 		<div class="navbar navbar-default" role="navigation">
 			<div class="navbar-header">
-				<span class="navbar-brand" style="color: #fff;"><span class="fa fa-paper-plane"></span> 班级风采网站后台管理系统</span>
+				<a href="/">
+					<span class="navbar-brand" style="color: #fff;"><span class="fa fa-paper-plane"></span>
+						班级风采网站后台管理系统</span>
+				</a>
 			</div>
 
 			<div class="navbar-collapse collapse" style="height: 1px;">
 				<ul id="main-menu" class="nav navbar-nav navbar-right">
 					<li class="dropdown hidden-xs">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<span class="glyphicon glyphicon-user padding-right-small" style="position:relative;top: 3px;"></span> 
-							小绿
+							<span class="glyphicon glyphicon-user padding-right-small"
+								style="position:relative;top: 3px;"></span>
+							{{username}}
 							<i class="fa fa-caret-down"></i>
 						</a>
 
 						<ul class="dropdown-menu">
-							<li><a tabindex="-1" href="sign-in.html">退出登录</a></li>
+							<li><a tabindex="-1" href="/admin/loginout">退出登录</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -51,16 +55,16 @@
 
 		<div class="sidebar-nav">
 			<ul>
-				<li><a href="index.html" class="nav-header"> 班级简介</a></li>
-				<li><a href="notice.html" class="nav-header"> 班级公告</a></li>
-				<li><a href="new.html" class="nav-header"> 班级新闻</a></li>
-				<li><a href="activity.html" class="nav-header"> 班级活动</a></li>
-				<li><a href="honor.html" class="nav-header"> 获奖信息</a></li>
-				<li><a href="learning-garden.html" class="nav-header"> 学习园地</a></li>
-				<li><a href="userlist.html" class="nav-header"> 成员管理</a></li>
-				<li><a href="plan.html" class="nav-header"> 活动方案</a></li>
+				<li><a href="/admin/index" v-if="userType ==1" class="nav-header"> 班级简介</a></li>
+				<li><a href="/admin/notice" v-if="userType ==1" class="nav-header"> 班级公告</a></li>
+				<li><a href="/admin/news" v-if="userType ==1" class="nav-header"> 班级新闻</a></li>
+				<li><a href="/admin/activity" v-if="userType ==1" class="nav-header"> 班级活动</a></li>
+				<li><a href="/admin/honor" v-if="userType ==1" class="nav-header"> 获奖信息</a></li>
+				<li><a href="/admin/learningGarden" v-if="userType ==1" class="nav-header"> 学习园地</a></li>
+				<li><a href="/admin/userlist" v-if="userType ==2" class="nav-header"> 成员管理</a></li>
+				<li><a href="/admin/plan" v-if="userType ==2" class="nav-header"> 活动方案</a></li>
 				<!-- 留言信息班干和老师都可以管理 -->
-				<li class="active"><a href="message.html" class="nav-header"> 留言信息</a></li>
+				<li class="active"><a href="/admin/message" class="nav-header"> 留言信息</a></li>
 			</ul>
 		</div>
 
@@ -81,29 +85,100 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>小绿</td>
-									<td>班长</td>
-									<td class="messge">这是一条留言</td>
-									<td class="operation">
-										<a href="#">删除</a>
-									</td>
-								</tr>
-								<tr>
-									<td>小蓝</td>
-									<td>无</td>
-									<td class="messge">这是一条留言</td>
-									<td class="operation">
-										<a href="#">删除</a>
-									</td>
-								</tr>
+								<template v-for="(v,index) in list">
+									<tr>
+										<td>{{v.username}}</td>
+										<td>{{v.office}}</td>
+										<td class="messge">{{v.context}}</td>
+										<td class="operation">
+											<a href="javascript:void(0);" @click="deleteMessage(v.id)">删除</a>
+										</td>
+									</tr>
+								</template>
 							</tbody>
 						</table>
+						<div style="text-align: center;">
+							<pageination :total="page.total" v-bind:size="page.size" :page="page.page" :objs="page"
+								:changge="getMessageList">
+							</pageination>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+</body>
+<script src="/js/jquery-3.0.0.min.js" type="text/javascript"></script>
+<script src="/layer/layer.js" type="text/javascript"></script>
+<script src="/js/vue.min.js"></script>
+<script src="/js/vue-resource.min.js"></script>
+<script src="/js/pageination.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			pages: 1,
+			page: {
+				total: 1,//总页数
+				size: 10,//每页显示条目个数不传默认10
+				page: 1,//当前页码
+			},
+			list: [],
+			username: '',
+			userType: 1,
+		},
+		methods: {
+			getMessageList: function (pages) {
+				this.pages = pages;
+				this.$http.get("/admin/message/getMessageList/" + pages).then(res => {
+					if (res.body.code == 200) {
+						let data = res.body.data;
+						this.page.size = data.size;
+						this.page.page = data.current;
+						this.page.total = data.total;
+						this.list = data.records;
+					}
+				})
+			},
+			deleteMessage: function (id) {
+				layer.confirm('确认删除该留言信息吗？', {
+					btn: ['确定', '取消']
+				}, function () {
+					this.$http.get("/admin/message/deleteMessage/" + id).then(res => {
+						layer.msg(res.body.msg);
+						if (res.body.code == 200) {
+							this.getMessageList(this.pages);
+						}
+					})
+				}.bind(this), function () {
 
-		<script src="lib/bootstrap/js/bootstrap.js"></script>
-	</body>
+				});
+			},
+			init: function () {
+				if (window.sessionStorage) {
+					if (sessionStorage.getItem("username")) {
+						this.username = sessionStorage.getItem("username");
+						this.userType = sessionStorage.getItem("userType");
+					} else {
+						this.$http.get("/admin/user/getUserSession").then(res => {
+							if (res.body.code == 200) {
+								let data = res.body.data;
+								sessionStorage.setItem("username", data.username);
+								sessionStorage.setItem("userType", data.userType);
+								this.username = data.username;
+								this.userType = data.userType
+							}
+						})
+					}
+				}
+			},
+		},
+		created: function () {
+			this.init();
+		}
+	});
+
+</script>
+
 </html>

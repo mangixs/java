@@ -1,4 +1,4 @@
-package com.wx.classstyle.config;
+package com.classes.style.config;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -21,26 +21,24 @@ import java.io.IOException;
 public class AdminAspect {
     private Logger log = LoggerFactory.getLogger(AdminAspect.class);
 
-    @Pointcut("execution(* com.wx.classstyle.controller.admin.*.*(..))")
-    private void adminLoginAspect(){
+    @Pointcut("execution(* com.classes.style.controller.admin.*.*(..))")
+    private void adminLoginAspect() {
 
     }
 
     @Before("adminLoginAspect()")
     public void adminLoginAspectBefore() throws IOException {
-        //checkUserIsLogin();
+        checkUserIsLogin();
     }
 
     public void checkUserIsLogin() throws IOException {
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();
         HttpServletResponse response = servletRequestAttributes.getResponse();
-        HttpSession session= request.getSession();
-        if(session.getAttribute("username") == null) {
-            System.out.println("你还没有登陆");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("username") == null) {
             response.sendRedirect("/login");
-        } else {
-            System.out.println("你已经登陆了");
         }
     }
 }

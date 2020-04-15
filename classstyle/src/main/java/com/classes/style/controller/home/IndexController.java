@@ -1,11 +1,15 @@
-package com.wx.classstyle.controller.home;
+package com.classes.style.controller.home;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
 @Controller
 public class IndexController {
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index() {
         return "home/index";
     }
@@ -49,4 +53,15 @@ public class IndexController {
     public String article() {
         return "home/article";
     }
+
+    @RequestMapping("/signUp")
+    public String signUp() {
+        return "admin/sign-up";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "admin/sign-in";
+    }
+
 }

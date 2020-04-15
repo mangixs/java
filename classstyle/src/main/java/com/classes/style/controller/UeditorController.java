@@ -1,6 +1,6 @@
-package com.wx.classstyle.controller;
+package com.classes.style.controller;
 
-import com.wx.classstyle.upload.ActionEnter;
+import com.classes.style.upload.ActionEnter;
 import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-
+import java.io.*;
 
 @Controller
 public class UeditorController {
@@ -21,7 +19,7 @@ public class UeditorController {
     @Value("${web.upload-path}")
     private String uploadDir;
 
-    @RequestMapping(value="/config")
+    @RequestMapping(value = "/config")
     public void config(HttpServletRequest request, HttpServletResponse response) throws JSONException {
         response.setContentType("application/json");
         String rootPath = request.getSession().getServletContext().getRealPath("/");
@@ -34,6 +32,5 @@ public class UeditorController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

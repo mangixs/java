@@ -1,25 +1,37 @@
+web:
+  upload-path: D:/
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring_class_style?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost:3306/spring_class_style?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false
     username: root
     password: root
   thymeleaf:
     cache: false
     mode: HTML5
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path},classpath:static/,file:static/
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+    session:
+      timeout: 1800
+  server:
+    error404: /status/404.html
+    error500: /status/500.html
 logging:
   level:
     com:
-      example:
-        demo:
+      classes:
+        style:
           mapper: debug
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 server:
-  port: 8090
+  port: 8080
 
-file:
-  upload-dir: ./src/main/resources/static/image
+# INSERT INTO `spring_class_style`.`class_user`(`username`, `password`, `identity`, `office`, `header_img`, `user_type`, `is_show`, `summary`, `number`, `account_status`, `operator`, `created_at`, `updated_at`) VALUES ('teacher', '724349B04985CEED48A3D2490A4BEB95', 2, '老师', '', 2, 1, '老师', 20200001, 1, 'teacher', now(), now());
 
 
 

@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 08/04/2020 21:49:24
+ Date: 12/04/2020 19:47:46
 */
 
 SET NAMES utf8mb4;
@@ -39,6 +39,24 @@ CREATE TABLE `class_activity`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '活动方案表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for class_article
+-- ----------------------------
+DROP TABLE IF EXISTS `class_article`;
+CREATE TABLE `class_article`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章标题',
+  `context` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章内容',
+  `new_type` tinyint(1) NOT NULL COMMENT '文章类型',
+  `author` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作者',
+  `operator` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作人',
+  `is_valid` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否有效 1 有效 2 无效',
+  `created_at` datetime(0) NOT NULL COMMENT '创建时间',
+  `updated_at` datetime(0) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index_valid`(`is_valid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '班级学习园地文章表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for class_honor
 -- ----------------------------
 DROP TABLE IF EXISTS `class_honor`;
@@ -55,6 +73,24 @@ CREATE TABLE `class_honor`  (
   INDEX `index_title`(`title`) USING BTREE,
   INDEX `index_valid`(`is_valid`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '获奖信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for class_message
+-- ----------------------------
+DROP TABLE IF EXISTS `class_message`;
+CREATE TABLE `class_message`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名称',
+  `office` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职位',
+  `context` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '留言内容',
+  `is_valid` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1 有效 2 无效',
+  `operator` char(24) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作者',
+  `created_at` datetime(0) NOT NULL COMMENT '创建时间',
+  `updated_at` datetime(0) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `index_username`(`username`) USING BTREE,
+  INDEX `index_valid`(`is_valid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户留言表	' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for class_news
@@ -107,7 +143,7 @@ CREATE TABLE `class_style_config`  (
   `updated_at` datetime(0) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index_config_name`(`config_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for class_user
@@ -120,6 +156,7 @@ CREATE TABLE `class_user`  (
   `identity` tinyint(1) NOT NULL DEFAULT 1 COMMENT '用户身份 1 学生 2 班干',
   `office` char(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职位名称',
   `header_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '头像',
+  `user_type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1 学生 2 老师',
   `is_show` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否显示 1 显示 2 不显示',
   `summary` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '简介',
   `number` int(11) NOT NULL COMMENT '学号',
@@ -129,6 +166,8 @@ CREATE TABLE `class_user`  (
   `updated_at` datetime(0) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index_username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '班级成员表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '班级成员表' ROW_FORMAT = Dynamic;
+
+INSERT INTO `spring_class_style`.`class_user`(`username`, `password`, `identity`, `office`, `header_img`, `user_type`, `is_show`, `summary`, `number`, `account_status`, `operator`, `created_at`, `updated_at`) VALUES ('teacher', '724349B04985CEED48A3D2490A4BEB95', 2, '老师', '', 2, 1, '老师', 20200001, 1, 'teacher', now(), now());
 
 SET FOREIGN_KEY_CHECKS = 1;

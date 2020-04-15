@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.classes.style.mapper.ClassActivityMapper">
+    <select id="getActivityList" resultType="com.classes.style.entity.ClassActivity">
+        select id,title,program,audit,activity_img,is_show from class_activity where is_valid = 1
+    </select>
+
+    <select id="getPlanActivityList" resultType="com.classes.style.entity.ClassActivity">
+        select id,title,program,audit from class_activity where is_valid = 1 and audit != 1
+    </select>
+
+    <select id="getArchiveList" resultType="com.classes.style.entity.ClassActivity">
+        select id,title,activity_img from class_activity where is_valid = 1 and audit = 3 and is_show = 1
+    </select>
+</mapper>

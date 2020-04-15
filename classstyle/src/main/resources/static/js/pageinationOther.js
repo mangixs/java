@@ -28,7 +28,7 @@ Vue.component('pageinationOther', {
             pageinationPage: 0,//可分页数
             startDisabled: true,//是否可以点击首页上一页
             endDisabled: true,//是否可以点击尾页下一页
-            pageChangge: this.changge,//修改方法
+            pageChanggeOther: this.changge,//修改方法
             pageIsUrl: this.isUrl ? true : false,//是否开启修改url
         }
     },

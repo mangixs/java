@@ -1,4 +1,4 @@
-package com.wx.classstyle;
+package com.classes.style;
 
 import com.classes.style.utils.DateUtil;
 import org.junit.jupiter.api.Test;

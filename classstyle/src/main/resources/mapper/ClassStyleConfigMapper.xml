@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.classes.style.mapper.ClassStyleConfigMapper">
+    <select id="getClassStyleConfigByName" parameterType="java.util.ArrayList" resultType="com.classes.style.entity.ClassStyleConfig">
+        select * from class_style_config
+        where config_name in
+        <foreach collection="list" open="(" item="item" index="index"  close =")" separator="," >
+            #{item}
+        </foreach>
+        and is_valid = 1;
+    </select>
+
+    <insert id="insertConfig" parameterType="com.classes.style.entity.ClassStyleConfig">
+        insert into class_style_config (config_name,config_value,config_desc,is_valid,operator,created_at,updated_at)
+                                values (#{configName},#{configValue},#{configDesc},#{isValid},#{operator},#{createdAt},#{updatedAt});
+    </insert>
+
+    <update id="updateConfig" parameterType="com.classes.style.entity.ClassStyleConfig">
+        update class_style_config set config_value = #{configValue}, operator = #{operator}, updated_at = #{updatedAt} where config_name = #{configName};
+    </update>
+
+    <select id="getClassConfigByCode" resultType="com.classes.style.entity.ClassStyleConfig" >
+     select * from class_style_config where config_name = #{configName} and is_valid = 1;
+    </select>
+</mapper>

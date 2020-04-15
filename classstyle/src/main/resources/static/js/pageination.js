@@ -1,4 +1,4 @@
-var pageination='<script type="text/x-template" id="pageination">\n' +
+var pageination = '<script type="text/x-template" id="pageination">\n' +
     '    <div class="pageination_align">\n' +
     '        <div class="pageination" v-if="pageinationTotal">\n' +
     '            <div @click="pageUp(0)" class="pagination_page" :class="startDisabled?\'disabled\':\'\'">首页</div>\n' +
@@ -17,12 +17,12 @@ var pageination='<script type="text/x-template" id="pageination">\n' +
 var dom = document.querySelector("body");
 dom.innerHTML += pageination;
 Vue.component('pageination', {
-    props: ['total', 'size', 'page', 'changge', 'isUrl'],
+    props: ['total', 'size', 'page', 'changge', 'isUrl', 'objs'],
     template: '#pageination',
-    data() {
+    data: function () {
         return {
             pageinationTotal: this.total,//总条目数
-            pageinationSize: this.size ? this.size : 10,//每页显示条目个数
+            pageinationSize: this.size ? this.size : 10,//每页显示条目个数 这个没搞懂为什么传不到组件来 用个objs 再传一次
             pageinationLength: [],
             pageinationCurrentPage: this.page ? this.page : 1,//当前页数默认1
             pageinationPage: 0,//可分页数
@@ -40,6 +40,7 @@ Vue.component('pageination', {
         },//跳转页码
         pagers() {
             //可分页数
+            this.pageinationSize = this.objs.size;
             this.pageinationPage = Math.ceil(this.pageinationTotal / this.pageinationSize);
             //url修改
             if (this.pageIsUrl) {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.classes.style.mapper.ClassNewsMapper">
+    <select id="getNewsList" resultType="com.classes.style.entity.ClassNews">
+        select id,title,DATE_FORMAT(updated_at,'%Y-%m-%d %H:%i:%s') as updated_at,author,new_type from class_news where is_valid = 1
+    </select>
+
+    <select id="getNewsListByType" resultType="com.classes.style.entity.ClassNews">
+        select id,title,DATE_FORMAT(updated_at,'%Y-%m-%d') as updated_at,author,new_type from class_news where is_valid = 1 and new_type = #{newType}
+    </select>
+</mapper>

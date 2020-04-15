@@ -1,4 +1,4 @@
-package com.wx.classstyle;
+package com.classes.style;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

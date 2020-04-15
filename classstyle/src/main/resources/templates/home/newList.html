@@ -16,14 +16,12 @@
 
 	<!-- CSS
 	================================================== -->
-	<link rel="stylesheet" href="css/zerogrid.css">
-	<link rel="stylesheet" href="css/menu.css">
+	<link rel="stylesheet" href="/css/zerogrid.css">
+	<link rel="stylesheet" href="/css/menu.css">
 
 	<!-- Custom Fonts -->
-	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-	<script src="js/jquery.min.js" type="text/javascript"></script>
-
+	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/css/page.css">
 	<style type="text/css">
 		#main-content {
 			width: 1000px;
@@ -70,52 +68,27 @@
 		.navigation {
 			position: absolute;
 			bottom: 8px;
-		}
-
-		.navigation ul {
-			float: left;
-		}
-
-		.navigation ul li {
-			float: left;
-			margin: 0 4px 0 0;
-			list-style: none;
-		}
-
-		.navigation ul li a {
-			padding: 3px 7px;
-			border: solid 1px #d7e2ee;
-			border-radius: 3px;
-			-webkit-border-radius: 3px;
-			-moz-border-radius: 3px;
-			-khtml-border-radius: 3px;
-			color: #333;
-			text-decoration: none;
-		}
-
-		.navigation ul li.active a {
-			border: 0px;
-			background: #006699;
-			color: #fff;
+			text-align: center;
+			width: 100%;
 		}
 	</style>
 </head>
 
 <body>
-	<div class="wrap-body">
+	<div class="wrap-body" id="app">
 
 		<!--////////////////////////////////////Header-->
 		<header class="zerogrid">
 			<div id='cssmenu' class="align-center">
 				<ul>
-					<li><a href='index'><span>首页</span></a></li>
-					<li><a href='notice'><span>班级公告</span></a>
-					<li><a href='single'><span>班级简介</span></a></li>
-					<li class="active"><a href='newList'><span>班级新闻</span></a></li>
-					<li><a href='archive'><span>班级活动</span></a></li>
-					<li><a href='honor'><span>班级荣誉</span></a></li>
-					<li><a href='learningGarden'><span>学习园地</span></a></li>
-					<li><a href='message'><span>留言板</span></a></li>
+					<li><a href='/'><span>首页</span></a></li>
+					<li><a href='/notice'><span>班级公告</span></a></li>
+					<li><a href='/single'><span>班级简介</span></a></li>
+					<li class="active"><a href='/newList'><span>班级新闻</span></a></li>
+					<li><a href='/archive'><span>班级活动</span></a></li>
+					<li><a href='/honor'><span>班级荣誉</span></a></li>
+					<li><a href='/learningGarden'><span>学习园地</span></a></li>
+					<li><a href='/message'><span>留言板</span></a></li>
 				</ul>
 			</div>
 		</header>
@@ -128,22 +101,14 @@
 							<h3>时事热点</h3>
 							<ul class="garden-box">
 								<!-- 一页10条 -->
-								<li><a href="article">C语言基础语法</a><span class="time">2020-02-10</span></li>
-								<li><a href="article">手把手教你使用最优雅的Java框架SSM</a><span class="time">2020-02-10</span></li>
-								<li><a href="article">前端工程师面试100问</a><span class="time">2020-02-10</span></li>
-								<li><a href="article">贪心算法解析</a><span class="time">2020-02-10</span></li>
-								<li><a href="article">贪心算法解析</a><span class="time">2020-02-10</span></li>
+								<li v-for="(v, index) in list"><a
+										:href="'/article?type=news&id='+v.id">{{v.title}}</a><span
+										class="time">{{v.updatedAt}}</span></li>
 							</ul>
 							<div class="navigation">
-								<ul>
-									<li><a href="#">上一页</a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">...</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">下一页</a></li>
-								</ul>
+								<pageination :total="page.total" v-bind:size="page.size" :page="page.page" :objs="page"
+									:changge="getProfessionList">
+								</pageination>
 							</div>
 						</div>
 					</div>
@@ -152,27 +117,14 @@
 							<h3>班级新闻</h3>
 							<ul class="garden-box">
 								<!-- 一页10条 -->
-								<li><a href="article">C语言基础语法</a><span class="time">2020-02-10</span></li>
-								<li><a href="article">手把手教你使用最优雅的Java框架SSM</a><span class="time">2020-02-10</span></li>
-								<li><a href="article">前端工程师面试100问</a><span class="time">2020-02-10</span></li>
-								<li><a href="article">贪心算法解析</a><span class="time">2020-02-10</span></li>
-								<li><a href="article">贪心算法解析</a><span class="time">2020-02-10</span></li>
-								<li><a href="#">C语言基础语法</a><span class="time">2020-02-10</span></li>
-								<li><a href="#">手把手教你使用最优雅的Java框架SSM</a><span class="time">2020-02-10</span></li>
-								<li><a href="#">前端工程师面试100问</a><span class="time">2020-02-10</span></li>
-								<li><a href="#">贪心算法解析</a><span class="time">2020-02-10</span></li>
-								<li><a href="#">贪心算法解析</a><span class="time">2020-02-10</span></li>
+								<li v-for="(v, index) in listOther"><a
+										:href="'/article?type=news&id='+v.id">{{v.title}}</a><span
+										class="time">{{v.updatedAt}}</span></li>
 							</ul>
 							<div class="navigation">
-								<ul>
-									<li><a href="#">上一页</a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">...</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">下一页</a></li>
-								</ul>
+								<pageination :total="pageOther.total" v-bind:size="pageOther.size"
+									:page="pageOther.page" :objs="pageOther" :changge="getOtherList">
+								</pageination>
 							</div>
 						</div>
 					</div>
@@ -182,5 +134,62 @@
 
 	</div>
 </body>
+<!-- vue和http请求 -->
+<script src="/js/jquery-3.0.0.min.js" type="text/javascript"></script>
+<script src="/js/vue.min.js"></script>
+<script src="/js/vue-resource.min.js"></script>
+<script src="/js/pageination.js"></script>
+<script src="/js/pageinationOther.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			pages: 1,
+			page: {
+				total: 1,//总页数
+				size: 10,//每页显示条目个数不传默认10
+				page: 1,//当前页码
+			},
+			list: [],
+			pagesOther: 1,
+			pageOther: {
+				total: 1,//总页数
+				size: 10,//每页显示条目个数不传默认10
+				page: 1,//当前页码
+			},
+			listOther: [],
+		},
+		methods: {
+			getProfessionList: function (pages) {
+				this.pages = pages;
+				this.$http.get("/api/getNewsTimesList/" + pages).then(res => {
+					if (res.body.code == 200) {
+						let data = res.body.data;
+						this.page.size = data.size;
+						this.page.page = data.current;
+						this.page.total = data.total;
+						this.list = data.records;
+					}
+				})
+			},
+			getOtherList: function (pagesOther) {
+				this.pagesOther = pagesOther;
+				this.$http.get("/api/getNewsClassList/" + pagesOther).then(res => {
+					if (res.body.code == 200) {
+						let data = res.body.data;
+						this.pageOther.size = data.size;
+						this.pageOther.page = data.current;
+						this.pageOther.total = data.total;
+						this.listOther = data.records;
+					}
+				})
+			},
+		},
+		created: function () {
+		}
+	});
+
+</script>
 
 </html>

@@ -1,13 +1,9 @@
-package com.wx.classstyle.upload;
-
-import org.springframework.beans.factory.annotation.Value;
+package com.classes.style.upload;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public class Uploader {
-
-
 
 	private HttpServletRequest request = null;
 	private Map<String, Object> conf = null;
@@ -23,10 +19,9 @@ public class Uploader {
 		State state = null;
 
 		if ("true".equals(this.conf.get("isBase64"))) {
-			state = Base64Uploader.save(this.request.getParameter(filedName),
-					this.conf);
+			state = Base64Uploader.save(this.request.getParameter(filedName), this.conf);
 		} else {
-			state = com.wx.classstyle.upload.BinaryUploader.save(this.request, this.conf);
+			state = BinaryUploader.save(this.request, this.conf);
 		}
 
 		return state;

@@ -1,86 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
 
-		<!-- Basic Page Needs
+<head>
+
+	<!-- Basic Page Needs
   ================================================== -->
-		<meta charset="utf-8">
-		<title>班级风采网站</title>
-		<meta name="description" content="Free Responsive Html5 Css3 Templates ">
-		<meta name="author" content="">
+	<meta charset="utf-8">
+	<title>班级风采网站</title>
+	<meta name="description" content="Free Responsive Html5 Css3 Templates ">
+	<meta name="author" content="">
 
-		<!-- Mobile Specific Metas
+	<!-- Mobile Specific Metas
 	================================================== -->
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-		<!-- CSS
+	<!-- CSS
 	================================================== -->
-		<link rel="stylesheet" href="css/zerogrid.css">
-		<link rel="stylesheet" href="css/menu.css">
+	<link rel="stylesheet" href="/css/zerogrid.css">
+	<link rel="stylesheet" href="/css/menu.css">
 
-		<!-- Custom Fonts -->
-		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!-- Custom Fonts -->
+	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-		<script src="js/jquery.min.js" type="text/javascript"></script>
+	<style type="text/css">
+		#main-content {
+			width: 1000px;
+			margin-top: 50px;
+			padding: 24px;
+			background: #f7f7f7;
+		}
 
-		<style type="text/css">
-			#main-content {
-				width: 1000px;
-				margin-top: 50px;
-				padding: 24px;
-			    background: #f7f7f7;
-			}
-			h2{
-				text-align: center;
-				margin-top: 0;
-			}
-			.time{
-				color: #888;
-				text-align: center;
-				margin: 0 40px;
-			}
-			p{
-				text-indent: 2em;
-			}
-		</style>
-	</head>
+		h2 {
+			text-align: center;
+			margin-top: 0;
+		}
 
-	<body>
-		<div class="wrap-body">
+		.time {
+			color: #888;
+			text-align: center;
+			margin: 0 40px;
+		}
 
-			<!--////////////////////////////////////Header-->
-			<header class="zerogrid">
-				<div id='cssmenu' class="align-center">
-					<ul>
-						<li><a href='index.html'><span>首页</span></a></li>
-						<li><a href='notice.html'><span>班级公告</span></a>
-						<li><a href='single.html'><span>班级简介</span></a></li>
-						<li class="active"><a href='new-list.html'><span>班级新闻</span></a></li>
-						<li><a href='archive.html'><span>班级活动</span></a></li>
-						<li><a href='honor.html'><span>班级荣誉</span></a></li>
-						<li><a href='learning-garden.html'><span>学习园地</span></a></li>
-						<li><a href='message.html'><span>留言板</span></a></li>
-					</ul>
-				</div>
-			</header>
+		p {
+			text-indent: 2em;
+		}
+	</style>
+</head>
 
-			<div id="main-content" class="zerogrid">
-				<div class="row">
-					<h2>文章标题</h2>
-					<div class="time">2020-04-01</div>
-					<p>文章内容，这是第一段</p>
-					<p>Through her career, Linda has focused her efforts on building infrastructure around company operations and
-						international expansion at startup companies.</p>
-					<p>Through her career, Linda has focused her efforts on building infrastructure around company operations and
-						international expansion at startup companies.</p>
-					<p>文章内容，这是第一段</p>
-					<p>Through her career, Linda has focused her efforts on building infrastructure around company operations and
-						international expansion at startup companies.</p>
-					<p>Through her career, Linda has focused her efforts on building infrastructure around company operations and
-						international expansion at startup companies.</p>
-				</div>
+<body>
+	<div class="wrap-body" id="app">
+		<!--////////////////////////////////////Header-->
+		<header class="zerogrid">
+			<div id='cssmenu' class="align-center">
+				<ul>
+					<li><a href='/'><span>首页</span></a></li>
+					<li><a href='/notice'><span>班级公告</span></a></li>
+					<li><a href='/single'><span>班级简介</span></a></li>
+					<li class="active"><a href='/newList'><span>班级新闻</span></a></li>
+					<li><a href='/archive'><span>班级活动</span></a></li>
+					<li><a href='/honor'><span>班级荣誉</span></a></li>
+					<li><a href='/learningGarden'><span>学习园地</span></a></li>
+					<li><a href='/message'><span>留言板</span></a></li>
+				</ul>
 			</div>
+		</header>
 
+		<div id="main-content" class="zerogrid">
+			<div class="row">
+				<h2>{{title}}</h2>
+				<div class="time">{{updatedAt}}</div>
+				<div class="article-text" v-html="context"></div>
+			</div>
 		</div>
-	</body>
+
+	</div>
+</body>
+<script src="/js/jquery-3.0.0.min.js" type="text/javascript"></script>
+<script src="/js/vue.min.js"></script>
+<script src="/js/vue-resource.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			title: '',
+			context: '',
+			updatedAt: '',
+		},
+		methods: {
+			getQueryVariable: function (variable) {
+				let query = window.location.search.substring(1);
+				let vars = query.split("&");
+				for (let i = 0; i < vars.length; i++) {
+					let pair = vars[i].split("=");
+					if (pair[0] == variable) { return pair[1]; }
+				}
+				return (false);
+			},
+			getSingleArticles: function () {
+				this.$http.get("/api/getSingleArticle/" + this.id + "/" + this.type).then(res => {
+					if (res.body.code == 200) {
+						let data = res.body.data;
+						this.title = data.title;
+						this.context = data.context;
+						this.updatedAt = data.updatedAt;
+					}
+				});
+			},
+			init: function () {
+				this.id = this.getQueryVariable('id');
+				this.type = this.getQueryVariable('type');
+				this.getSingleArticles();
+			},
+		},
+		created: function () {
+			this.init();
+		}
+	});
+</script>
+
 </html>

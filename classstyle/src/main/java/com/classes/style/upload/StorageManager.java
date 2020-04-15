@@ -1,11 +1,8 @@
-package com.wx.classstyle.upload;
+package com.classes.style.upload;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-
 
 public class StorageManager {
 	public static final int BUFFER_SIZE = 8192;
@@ -23,8 +20,7 @@ public class StorageManager {
 		}
 
 		try {
-			BufferedOutputStream bos = new BufferedOutputStream(
-					new FileOutputStream(file));
+			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 			bos.write(data);
 			bos.flush();
 			bos.close();
@@ -33,23 +29,22 @@ public class StorageManager {
 		}
 
 		state = new BaseState(true, file.getAbsolutePath());
-		state.putInfo( "size", data.length );
-		state.putInfo( "title", file.getName() );
+		state.putInfo("size", data.length);
+		state.putInfo("title", file.getName());
 		return state;
 	}
 
-	public static State saveFileByInputStream(InputStream is, String path,
-			long maxSize) {
+	public static State saveFileByInputStream(InputStream is, String path, long maxSize) {
 		State state = null;
 
 		File tmpFile = getTmpFile();
 
-		byte[] dataBuf = new byte[ 2048 ];
+		byte[] dataBuf = new byte[2048];
 		BufferedInputStream bis = new BufferedInputStream(is, StorageManager.BUFFER_SIZE);
 
 		try {
-			BufferedOutputStream bos = new BufferedOutputStream(
-					new FileOutputStream(tmpFile), StorageManager.BUFFER_SIZE);
+			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(tmpFile),
+					StorageManager.BUFFER_SIZE);
 
 			int count = 0;
 			while ((count = bis.read(dataBuf)) != -1) {
@@ -70,7 +65,7 @@ public class StorageManager {
 			}
 
 			return state;
-			
+
 		} catch (IOException e) {
 		}
 		return new BaseState(false, AppInfo.IO_ERROR);
@@ -81,12 +76,12 @@ public class StorageManager {
 
 		File tmpFile = getTmpFile();
 
-		byte[] dataBuf = new byte[ 2048 ];
+		byte[] dataBuf = new byte[2048];
 		BufferedInputStream bis = new BufferedInputStream(is, StorageManager.BUFFER_SIZE);
 
 		try {
-			BufferedOutputStream bos = new BufferedOutputStream(
-					new FileOutputStream(tmpFile), StorageManager.BUFFER_SIZE);
+			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(tmpFile),
+					StorageManager.BUFFER_SIZE);
 
 			int count = 0;
 			while ((count = bis.read(dataBuf)) != -1) {
@@ -127,9 +122,9 @@ public class StorageManager {
 		}
 
 		state = new BaseState(true);
-		state.putInfo( "size", targetFile.length() );
-		state.putInfo( "title", targetFile.getName() );
-		
+		state.putInfo("size", targetFile.length());
+		state.putInfo("title", targetFile.getName());
+
 		return state;
 	}
 

@@ -1,6 +1,5 @@
-package com.wx.classstyle.upload;
+package com.classes.style.upload;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -14,22 +13,17 @@ import java.util.Map;
 
 public class BinaryUploader {
 
-
-	public static final State save(HttpServletRequest request,
-								   Map<String, Object> conf) {
-
+	public static final State save(HttpServletRequest request, Map<String, Object> conf) {
 
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			return new BaseState(false, AppInfo.NOT_MULTIPART_CONTENT);
 		}
 
-
-
 		try {
 
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			MultipartFile multipartFile = multipartRequest.getFile(conf.get("fieldName").toString());
-			if(multipartFile==null){
+			if (multipartFile == null) {
 				return new BaseState(false, AppInfo.NOTFOUND_UPLOAD_DATA);
 			}
 
@@ -37,8 +31,7 @@ public class BinaryUploader {
 			String originFileName = multipartFile.getOriginalFilename();
 			String suffix = FileType.getSuffixByFilename(originFileName);
 
-			originFileName = originFileName.substring(0,
-					originFileName.length() - suffix.length());
+			originFileName = originFileName.substring(0, originFileName.length() - suffix.length());
 			savePath = savePath + suffix;
 
 			long maxSize = ((Long) conf.get("maxSize")).longValue();
@@ -49,13 +42,12 @@ public class BinaryUploader {
 
 			savePath = PathFormat.parse(savePath, originFileName);
 
-			String basePath=(String) conf.get("basePath");
+			String basePath = (String) conf.get("basePath");
 			String physicalPath = basePath + savePath;
 
-			//InputStream is = fileStream.openStream();
+			// InputStream is = fileStream.openStream();
 			InputStream is = multipartFile.getInputStream();
-			State storageState = StorageManager.saveFileByInputStream(is,
-					physicalPath, maxSize);
+			State storageState = StorageManager.saveFileByInputStream(is, physicalPath, maxSize);
 			is.close();
 
 			if (storageState.isSuccess()) {
@@ -65,8 +57,8 @@ public class BinaryUploader {
 			}
 
 			return storageState;
-		// } catch (FileUploadException e) {
-		// 	return new BaseState(false, AppInfo.PARSE_REQUEST_ERROR);
+			// } catch (FileUploadException e) {
+			// return new BaseState(false, AppInfo.PARSE_REQUEST_ERROR);
 		} catch (IOException e) {
 		}
 		return new BaseState(false, AppInfo.IO_ERROR);
